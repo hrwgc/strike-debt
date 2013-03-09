@@ -8,12 +8,18 @@
 <body>
 <div id='map'></div>
 <script>
-var map = mapbox.map('map');
-map.addLayer(mapbox.layer().id('occupy.map-63gtolga,occupy.rj-zip-polys,occupy.rj-lines', function() {
-    // this function runs after the layer examples.map-8ced9urs is loaded
-    // from MapBox and we know what interactive features are supported.
-    map.interaction.auto();
-}));
+mapbox.load('occupy.map-63gtolga,occupy.map-y5wz321c,occupy.rj-zip-polys,occupy.rj-lines', function(o) {
+    var map = mapbox.map('map');
+     map.addLayer(o.layer).zoom(5).center({ lat: 37.9962, lon:   -85.8691 });
+     map.setZoomRange(4, 9);
+     map.setPanLimits([{ lat: 46.4379, lon: -71.1914 }, { lat: 24.687, lon:  -111.8848 }]);
+
+
+
+
+     map.interaction.auto();
+     map.ui.hash.add();
+});
 </script>
 </body>
 </html>
