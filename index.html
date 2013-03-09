@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src='http://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.js'></script>
+  <link href='http://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.css' rel='stylesheet' />
+  <link href='style.css' rel='stylesheet' />
+</head>
+<body>
+<div id='map'></div>
+<script>
+var map = mapbox.map('map');
+map.addLayer(mapbox.layer().id('occupy.map-63gtolga,occupy.rj-zip-polys,occupy.rj-lines', function() {
+    // this function runs after the layer examples.map-8ced9urs is loaded
+    // from MapBox and we know what interactive features are supported.
+    map.interaction.auto();
+}));
+</script>
+</body>
+</html>
