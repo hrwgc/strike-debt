@@ -212,6 +212,16 @@ purchases.purchase_number;
 
 ### run geoarcs.r using purchase.csv as input and great-circles.shp as output. 
 
+```sh
+$ ogr2ogr \
+  -f "CSV" \
+  data/purchase.csv \
+  PG:"$PG_GDAL" \
+  -sql "SELECT * from zip_sums WHERE wkb_geometry is not null"
+```
+- use output csv (purchase.csv) in ```geoarcs.r```, which can be run through [R](http://www.r-project.org/)
+
+
 ### convert geoarcs.r output shapefile to postgis
 
 
