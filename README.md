@@ -12,6 +12,9 @@
                                            \______/
 </pre>
 
+[![](http://i.imgur.com/kKXN4YS.jpg)](http://hrwgc.github.com/strike-debt/)
+
+
 ===========
 
 ### Load hospitals table created from geocoded zip codes
