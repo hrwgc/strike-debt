@@ -1,0 +1,99 @@
+{
+  "bounds": [
+    -111.8848,
+    24.687,
+    -71.1914,
+    46.4379
+  ],
+  "center": [
+    -85.8691,
+    37.9962,
+    5
+  ],
+  "format": "png",
+  "interactivity": {
+    "fields": [
+      "first_purchase",
+      "second_purchase",
+      "zip",
+      "num_abolished",
+      "amount_abolished",
+      "ogc_fid"
+    ],
+    "layer": "zipsumsasb",
+    "template_teaser": "{{#first_purchase}}\n<h3 class='purchase'>First Round</h4>\n{{/first_purchase}}\n{{#second_purchase}}\n<h3 class='purchase'>Second Round</h4>\n{{/second_purchase}}\n\n<h4><span class='int-stat'>Zip Code </span><span class='int-value'>{{{zip}}}</span></h4>\n<h4><span class='int-stat'>Debtors Liberated </span><span class='int-value'>{{{num_abolished}}}</span></h4>\n<h4><span class='int-stat'>Total Debt Abolished </span><span class='int-value'>${{{amount_abolished}}}</span></h4>\n"
+  },
+  "minzoom": 0,
+  "maxzoom": 9,
+  "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+  "Stylesheet": [
+    "style.mss"
+  ],
+  "Layer": [
+    {
+      "geometry": "unknown",
+      "extent": [
+        -108.5621534027834,
+        25.56463341883604,
+        -71.9515178630329,
+        45.562371753364665
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select max(ogc_fid) as ogc_fid, count(ogc_fid) as num_abolished, zip, max(wkb_geometry) as wkb_geometry, purchase_number, regexp_replace(cast(purchase_number as text),'2','') as first_purchase,  regexp_replace(CAST(purchase_number as text),'1','') as second_purchase,  replace(to_char(cast (sum(princ_due) as INT), '999G999G990D00'),' ','') as amount_abolished, cast (sum(princ_due) as INT) as elev from zip_sums group by zip, purchase_number order by ST_YMax(ST_Envelope(max(wkb_geometry))) DESC) as b",
+        "key_field": "ogc_fid",
+        "geometry_field": "wkb_geometry",
+        "extent_cache": "auto",
+        "extent": "-12085083.6362191,2945258.08520967,-8009606.33031595,5710494.20324363",
+        "host": "localhost",
+        "port": "5432",
+        "dbname": "postgis",
+        "id": "zipsumsasb",
+        "project": "strike-debt",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
+      },
+      "id": "zipsumsasb",
+      "class": "",
+      "srs-name": "900913",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "advanced": {},
+      "name": "zipsumsasb"
+    },
+    {
+      "geometry": "linestring",
+      "extent": [
+        -108.08940000000032,
+        25.595950000000002,
+        -71.97653000000001,
+        45.49073000000003
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select * from zip_tot_lines) as t ",
+        "key_field": "ogc_fid",
+        "geometry_field": "wkb_geometry",
+        "extent_cache": "auto",
+        "extent": "-12032456.9681505,2949123.0729944,-8012390.66866678,5699110.57787996",
+        "host": "localhost",
+        "port": "5432",
+        "dbname": "postgis",
+        "id": "ziptotals",
+        "project": "strike-debt",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
+      },
+      "id": "ziptotals",
+      "class": "",
+      "srs-name": "900913",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "advanced": {},
+      "name": "ziptotals"
+    }
+  ],
+  "scale": 1,
+  "metatile": 2,
+  "_basemap": "http://a.tiles.mapbox.com/v3/occupy.map-8sk8i4lg,herwig.map-qjaygbf8.jsonp",
+  "name": "Rolling Jubilee Zip Codes",
+  "description": "",
+  "attribution": "",
+  "legend": ""
+}
